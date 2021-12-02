@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DetailPembelian extends Model
 {
     use HasFactory;
+    protected $table = "detail_pembelians";
 }
