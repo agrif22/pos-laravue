@@ -9,4 +9,15 @@ class DetailPembelian extends Model
 {
     use HasFactory;
     protected $table = "detail_pembelians";
+    protected $fillable = [
+        'id_pembelian',
+        'id_barang',
+        'harga_barang',
+        'qty'
+    ];
+
+
+    public function pembelian(){
+        return $this->belongsTo('Pembelian','id_pembelian');
+    }
 }

@@ -9,4 +9,15 @@ class Pelanggan extends Model
 {
     use HasFactory;
     protected $table = "pelanggans";
+    protected $fillable = [
+        'nama_pelanggan',
+        'alamat',
+        'telp',
+        'level'
+
+    ];
+
+    public function penjualan(){
+        return $this->hasMany('Penjualan','id_pelanggan');
+    }
 }

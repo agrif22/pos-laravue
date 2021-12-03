@@ -17,7 +17,7 @@ class CreatePenjualansTable extends Migration
             $table->id();
             $table->date('tgl_transaksi');
             $table->bigInteger('id_pelanggan');
-            $table->bigInteger('id_pegawai');
+            $table->bigInteger('id_karyawan');
             $table->bigInteger('status');
             $table->string('payment');
             $table->timestamps();

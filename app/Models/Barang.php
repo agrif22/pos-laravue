@@ -10,15 +10,16 @@ class Barang extends Model
     use HasFactory;
     protected $table = "barangs";
     protected $fillable = [
-        'nama','barcode','satuan','harga_beli','harga_jual','stok','id_suplier','id_pelanggan'
+        'nama','barcode','satuan','harga_beli','harga_jual','stok','id_suplier','id_kategori'
     ];
 
     public function pemasok(){
-        return $this->belongsTo('Pemasok','id_pemasok');
+        return $this->belongsTo('Suplier','id_suplier');
          
     }
     public function kategori(){
         return $this->belongsTo('Kategori','id_kategori');
          
     }
+    
 }
