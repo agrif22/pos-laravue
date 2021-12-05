@@ -12,8 +12,9 @@ class Suplier extends Model
     protected $table = "supliers";
     protected $fillable = [
         'nama_suplier',
-        'telp',
-        'alamat'
+        'alamat',
+        'telp'
+        
     ];
 
     public function barang(){

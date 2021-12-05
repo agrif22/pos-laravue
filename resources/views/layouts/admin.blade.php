@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>P.O.S | @yield('title')</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -26,6 +26,8 @@
   <link rel="stylesheet" href={{asset("assets/plugins/daterangepicker/daterangepicker.css")}}>
   <!-- summernote -->
   <link rel="stylesheet" href={{asset("assets/plugins/summernote/summernote-bs4.min.css")}}>
+
+  @stack('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -74,7 +76,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src={{asset("dist/img/user1-128x128.jpg")}} alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src={{asset("assets/dist/img/user1-128x128.jpg")}} alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -106,7 +108,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src={{asset("dist/img/user3-128x128.jpg")}} alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src={{asset("assets/dist/img/user3-128x128.jpg")}} alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -171,9 +173,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{route ('home')}}" class="brand-link">
       <img src={{asset("assets/dist/img/AdminLTELogo.png")}} alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Point Of Sale</span>
     </a>
 
     <!-- Sidebar -->
@@ -188,7 +190,7 @@
         </div>
       </div>
 
-      <!-- SidebarSearch Form -->
+      {{-- <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -198,22 +200,120 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
+          {{-- Menu Home  --}}
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <a href={{ url('home')}} class="nav-link {{ request()->is('home')? 'active': ''}}">
+              <i class="nav-icon fas fa-home"></i>
               <p>
                 Home
               </p>
             </a>
           </li>
-        </ul>
+          {{-- /Menu Home  --}}
+          
+          {{-- Menu Data Master --}}
+          <li class="nav-item menu-{{ request()->is('kategori', 'barang', 'suplier','pelanggan','karyawan')? 'open': 'close'}}">
+            <a href="#" class="nav-link {{ request()->is('kategori', 'barang', 'suplier','pelanggan','karyawan')? 'active': ''}}">
+              <i class="nav-icon fas fa-server"></i>
+              <p>
+                Data Master
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href={{ url("barang")}} class="nav-link {{ request()->is('barang')? 'active': ''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Barang</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href={{ url("suplier")}} class="nav-link {{ request()->is('suplier')? 'active': ''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Suplier</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href={{ url("pelanggan")}} class="nav-link {{ request()->is('pelanggan')? 'active': ''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pelanggan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href={{ url ("kategori")}} class="nav-link {{ request()->is('kategori')? 'active': ''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kategori</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href={{ url("karyawan")}} class="nav-link {{ request()->is('karyawan')? 'active': ''}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Karyawan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+            {{-- /Menu Data Master --}}
+
+            {{-- Menu Transaksi --}}
+          <li class="nav-item menu-{{ request()->is('pembelian', 'penjualan')? 'open': 'close'}}">
+            <a href="#" class="nav-link {{ request()->is('pembelian', 'penjualan')? 'active': ''}}">
+              <i class="nav-icon fas fa-cash-register"></i>
+              <p>
+                Transaksi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href={{ url('pembelian')}} class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pembelian</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href={{ url('penjualan')}} class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Penjualan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- Menu Transaksi --}}
+        
+          {{-- Menu Pengaturan --}}
+          <li class="nav-item menu-{{ request()->is('pengguna', 'lain-lain')? 'open': 'close'}}">
+            <a href={{ url('home')}} class="nav-link {{ request()->is('pengguna', 'lain-lain')? 'active': ''}}">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Pengaturan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengguna</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- Menu Pengaturan --}}
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -227,7 +327,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">@yield('header')</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -293,5 +393,10 @@
 <script src={{asset("assets/dist/js/demo.js")}}></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src={{asset("assets/dist/js/pages/dashboard.js")}}></script>
+<!-- Vue Js 3.0 -->
+<script src="{{asset('js/vue.js')}}"></script>
+<!-- axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+@stack('js')
 </body>
 </html>
