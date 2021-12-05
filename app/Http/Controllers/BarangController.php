@@ -14,7 +14,9 @@ class BarangController extends Controller
      */
     public function index()
     {
-        return view('admin.barang');
+        $datas = Barang::all();
+        $datatables = datatables()->of($datas)->addIndexColumn();
+        return $datatables->make(true);
     }
 
     /**
@@ -35,7 +37,17 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'barcode' => ['required'],
+            'nama' => ['required'],
+            'harga_beli' => ['required'],
+            'harga_jual' => ['required'],
+            'stok' => ['required'],
+            'satuan' => ['required'],
+
+        ]);
+        Barang::create($request->all());
+        return back();
     }
 
     /**
@@ -69,7 +81,17 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        $this->validate($request, [
+            'barcode' => ['required'],
+            'nama' => ['required'],
+            'harga_beli' => ['required'],
+            'harga_jual' => ['required'],
+            'stok' => ['required'],
+            'satuan' => ['required'],
+
+        ]);
+        $barang->update($request->all());
+        return back();
     }
 
     /**
@@ -80,6 +102,7 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        //
+        $barang->delete();
+        return back();
     }
 }

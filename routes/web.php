@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::get('/kategori',[AdminController::class ,'kategori']);
 Route::get('/suplier',[AdminController::class ,'suplier']);
 Route::get('/karyawan',[AdminController::class ,'karyawan']);
 Route::get('/pelanggan',[AdminController::class ,'pelanggan']);
+Route::get('/barang',[AdminController::class ,'barang']);
 
 
 
@@ -37,4 +39,5 @@ Route::group(['prefix' => 'data'], function () {
     Route::resource('suplier', SuplierController::class);
     Route::resource('karyawan', KaryawanController::class);
     Route::resource('pelanggan', PelangganController::class);
+    Route::resource('barang', BarangController::class);
 });
