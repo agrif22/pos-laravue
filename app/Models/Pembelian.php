@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Pembelian extends Model
 {
     use HasFactory;
-    protected $table = "detail_pembelians";
+    protected $table = "pembelians";
 
     protected $fillable = [
         'tgl_transaksi',
-        'id_pelanggan',
+        'id_suplier',
         'id_karyawan',
         'status',
         'payment'
     ];
 
     public function pemasok(){
-        return $this->belongsTo('Pemasok','id_pemasok');
+        return $this->belongsTo('Suplier','id_suplier');
     }
 
     public function pegawai(){

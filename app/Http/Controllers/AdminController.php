@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Pelanggan;
 use App\Models\Suplier;
 use App\Models\Barang;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -52,12 +53,29 @@ class AdminController extends Controller
                         ->select('*')
                         ->join('supliers','supliers.id','=','barangs.id_suplier')
                         ->join('kategoris','kategoris.id','=','barangs.id_kategori')
-                        ->get() ;
+                        ->get();
         $data['kategori']= Kategori::all();
         $data['suplier']= Suplier::all();
         return view('admin.barang', compact('data','data_barang'));
 
-        // return $data_barang;
+    }
+
+    public function pembelian()
+    {
+        $data_pembelian = DB::table('pembelians')
+                        ->select('pembelians.*')
+                        ->join('detail_pembelians','detail_pembelians.id_pembelian','=','pembelians.id')
+                        ->get();
+        $data['karyawan']= Karyawan::all();
+        $data['suplier']= Suplier::all();
+        // return [$data , $data_pembelian];
+        return view('admin.pembelian', compact( 'data' , 'data_pembelian'));
+
+    }
+
+    public function detailpembelian(){
+
+        return view('admin.detailpembelian');
     }
 
 

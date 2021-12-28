@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembelian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PembelianController extends Controller
 {
@@ -14,7 +15,15 @@ class PembelianController extends Controller
      */
     public function index()
     {
-        //
+        $datas=  DB::table('pembelians')
+                ->join('detail_pembelians','detail_pembelians.id_pembelian','=','pembelians.id')
+                ->join('supliers','supliers.id','=','pembelians.id_suplier')
+                ->join('karyawans','karyawans.id','=','pembelians.id_karyawan')
+                ->select('*')
+                ->get();
+
+        $datatables = datatables()->of($datas)->addIndexColumn();
+        return $datatables->make(true);
     }
 
     /**
@@ -35,7 +44,7 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

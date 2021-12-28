@@ -53,12 +53,16 @@
                 <input type="text" class="form-control" name="barcode" :value="data.barcode" required="">
             </div>
             <div class="form-group">
+                <label>id</label>
+                <input type="text" class="form-control" name="id" :value="data.id">
+            </div>
+            <div class="form-group">
                 <label>Nama Barang</label>
                 <input type="text" class="form-control" name="nama" :value="data.nama" required="">
             </div>
             <div class="form-group">
                 <label>Kategori</label>
-                <select name="id_kategori" id="" class="form-control">
+                <select name="id_kategori"  class="form-control">
                     <option value="">-- Pilih Kategori --</option>
                         @foreach ($data['kategori'] as $kategori)
                             <option :selected="data.id == {{ $kategori['id'] }} " value = "{{ $kategori['id'] }}"> {{ $kategori['nama_kategori'] }} </option>
@@ -83,7 +87,7 @@
             </div>
             <div class="form-group">
                 <label>Suplier</label>
-                <select name="id_suplier" id="" class="form-control">
+                <select name="id_suplier"  class="form-control">
                     <option value="">-- Pilih Suplier --</option>
                         @foreach ($data['suplier'] as $suplier)
                             <option :selected="data.id == {{ $suplier['id'] }} " value = "{{ $suplier['id'] }}"> {{ $suplier['nama_suplier'] }} </option>
@@ -112,12 +116,12 @@
   var columns = [
       {data: 'barcode', class: 'text-center', orderable: true},
       {data: 'nama', class: 'text-center', orderable: true},
-      {data: 'id_kategori', class: 'text-center', orderable: true},
+      {data: 'nama_kategori', class: 'text-center', orderable: true},
       {data: 'harga_beli', class: 'text-center', orderable: true},
       {data: 'harga_jual', class: 'text-center', orderable: true},
       {data: 'stok', class: 'text-center', orderable: true},
       {data: 'satuan', class: 'text-center', orderable: true},
-      {data: 'id_suplier', class: 'text-center', orderable: true},
+      {data: 'nama_suplier', class: 'text-center', orderable: true},
       {render: function(index, row, data, meta){
       return ` <a href="#" class="btn btn-sm btn-warning" onclick="controller.ubahData(event,${meta.row})">Edit</a> <a href="#" class="btn btn-sm btn-danger" onclick="controller.hapusData(event, ${data.id})">Delete</a> `;
             },orderable: false, class: 'text-center', width : '150px'
