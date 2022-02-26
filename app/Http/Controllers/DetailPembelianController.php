@@ -12,9 +12,9 @@ class DetailPembelianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+      return $request;   
     }
 
     /**
@@ -35,7 +35,7 @@ class DetailPembelianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**

@@ -24,6 +24,7 @@ class BarangController extends Controller
                 ->join('supliers','supliers.id','=','barangs.id_suplier')
                 ->join('kategoris','kategoris.id','=','barangs.id_kategori')
                 ->get();
+            // return $datas;
         $datatables = datatables()->of($datas)->addIndexColumn();
         return $datatables->make(true);
     }

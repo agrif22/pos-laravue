@@ -11,6 +11,79 @@
 
 @section('content')
 <component id="controller">
+    <div class="row mb-4">
+         {{-- Form Pertama --}}
+         <div class="col-lg-6">
+            <div class="box box-widget">
+                <div class="box-body">
+                    <table width="100%">
+                        {{-- Input Tanggal --}}
+                        @csrf
+                     <input type="hidden" name="_method" value="PUT">
+                        <tr>
+                            <td>
+                                <label for="tanggal">Tanggal</label>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" name="" id="tanggal" value="dd/mm/yyyy" class="form-control">
+                                </div> 
+                            </td>
+                        </tr>
+
+                        {{-- Input Karyawan/Kasir --}}
+                        <tr>
+                            <td style="vertical-align: top; width:20%">
+                                <label for="karyawan">Kasir</label>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select name="id_karyawan"  class="form-control">
+                                        <option value="">-- Pilih Kasir --</option>
+                                            @foreach ($data['karyawan'] as $karyawan)
+                                                <option :selected="data.id_karyawan == {{ $karyawan['id'] }} " value = "{{ $karyawan['id'] }}"> {{ $karyawan['nama_karyawan'] }} </option>
+                                            @endforeach
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+
+                        {{-- Input Suplier --}}
+                        <tr>
+                            <td style="vertical-align: top; width:20%">
+                                <label for="suplier">Suplier</label>
+                            </td>
+                            <td>
+                                <select id="suplier" class="form-control">
+                                   <option value="">-- Pilih Suplier --</option>
+                                   @foreach ($data['suplier'] as $suplier)
+                                                <option :selected="data.id_suplier == {{ $suplier['id'] }} " value = "{{ $suplier['id'] }}"> {{ $suplier['nama_suplier'] }} </option>
+                                            @endforeach
+                                </select>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>        
+        </div>
+        {{-- / Form Pertama --}}
+   
+    
+    
+        {{-- Form Kedua --}}
+    <div class="col-lg-6">
+        <div class="box box-widget">
+            <div class="box-body">
+                <div align="right">
+                    <h4> Invoice <b><span id="invoice">MP190925001</span></b></h4>
+                    <h1><b><span id="grand_total2" style="font-size: 80pt">0</span></b></h1>
+                </div>
+            </div>
+        </div>
+    {{-- /Form Kedua --}}
+    </div>
+    </div>
     <div>
         <div class="col-md-12 flex">
             <table class="table table-striped text-center" width="100%" id="tabel1">
@@ -34,7 +107,7 @@
                     </tr>
                 </thead>
             </table>
-            <button class="btn btn-primary" id="simpan">Simpan</button>
+            <button class="btn btn-primary" type="submit" id="simpan">Simpan</button>
         </div>
         
     </div>
@@ -75,6 +148,10 @@
       let hapus = $(this).data('row')
       $('#' + hapus).remove()
   })
+
+  $( function() {
+    $( "#tanggal" ).datepicker({format:"dd-mm-yyyy"});
+  } );
 </script>
 
 @endpush

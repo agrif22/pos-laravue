@@ -53,10 +53,6 @@
                 <input type="text" class="form-control" name="barcode" :value="data.barcode" required="">
             </div>
             <div class="form-group">
-                <label>id</label>
-                <input type="text" class="form-control" name="id" :value="data.id">
-            </div>
-            <div class="form-group">
                 <label>Nama Barang</label>
                 <input type="text" class="form-control" name="nama" :value="data.nama" required="">
             </div>
@@ -65,7 +61,7 @@
                 <select name="id_kategori"  class="form-control">
                     <option value="">-- Pilih Kategori --</option>
                         @foreach ($data['kategori'] as $kategori)
-                            <option :selected="data.id == {{ $kategori['id'] }} " value = "{{ $kategori['id'] }}"> {{ $kategori['nama_kategori'] }} </option>
+                            <option :selected="data.id_kategori == {{ $kategori['id'] }} " value = "{{ $kategori['id'] }}"> {{ $kategori['nama_kategori'] }} </option>
                         @endforeach
                 </select>
             </div>
@@ -90,7 +86,7 @@
                 <select name="id_suplier"  class="form-control">
                     <option value="">-- Pilih Suplier --</option>
                         @foreach ($data['suplier'] as $suplier)
-                            <option :selected="data.id == {{ $suplier['id'] }} " value = "{{ $suplier['id'] }}"> {{ $suplier['nama_suplier'] }} </option>
+                            <option :selected="data.id_suplier == {{ $suplier['id'] }} " value = "{{ $suplier['id'] }}"> {{ $suplier['nama_suplier'] }} </option>
                         @endforeach
                 </select>
             </div>

@@ -74,8 +74,11 @@ class AdminController extends Controller
     }
 
     public function detailpembelian(){
+        $data['karyawan']= Karyawan::all();
+        $data['suplier']= Suplier::all();
+        // return $data;
 
-        return view('admin.detailpembelian');
+        return view('admin.detailpembelian', compact('data'));
     }
 
 
